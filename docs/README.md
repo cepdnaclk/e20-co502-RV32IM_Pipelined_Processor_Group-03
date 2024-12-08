@@ -3,13 +3,14 @@ layout: home
 permalink: index.html
 
 # Please update this with your repository name and title
-repository-name: eYY-XXX-project-template
+repository-name: e20-co502-RV32IM_Pipelined_Processor_Group-03
 title:
 ---
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
-# Project Title
+# RISC-V 32IM Pipelined Processor
+
 
 ---
 
