@@ -8,3 +8,5 @@ ___
 - __32__ indicates the __32-bit architecture__.Which means the processor uses 32-bit wide registers and supports 32-bit addresses and data widths.
 - __I__ stands for __Base Integer Instruction Set__.
 - __M__ stands for __Integer Multiplication and Division Extention__.
+
+![risc-v](docs/images/risc-v.jpeg)
