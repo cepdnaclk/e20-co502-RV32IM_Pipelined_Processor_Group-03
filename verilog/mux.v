@@ -12,5 +12,4 @@ module mux(IN1, IN2, SELECT, OUT);
         else
             OUT = IN2
     end
-
 endmodule
