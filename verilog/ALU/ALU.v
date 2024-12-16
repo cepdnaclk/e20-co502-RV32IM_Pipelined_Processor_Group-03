@@ -6,6 +6,14 @@ module Add_unit(data1,data2,result);
     assign result = data1 + data2;
 endmodule
 
+module Sub_unit(data1,data2,result);
+    input [31:0] data1;
+    input [31:0] data2;
+    output [31:0] result;
+
+    assign result = data1 - data2;
+endmodule
+
 module XOR_unit(data1,data2,result);
     input [31:0] data1;
     input [31:0] data2;
@@ -124,7 +132,7 @@ module SRA_Unit(data1,data2,result);// logical right (to get logical write data 
     input [31:0] data1;
     input [31:0] data2;
     output [31:0] result;
-    assign result = $signed(data1) >> data2;
+    assign result = data1 >>> data2;
 endmodule
 
 module SLT_Unit(data1,data2,result);// set less than
@@ -136,14 +144,23 @@ module SLT_Unit(data1,data2,result);// set less than
     
 endmodule
 
-module ALU_unit(Opcode, data1, data2, result);
+module Zero_out(result,zero);
+    input [31:0] result;
+    output zero;
+    
+    assign zero = (result == 32'b0000_0000_0000_0000_0000_0000_0000_0000) ? 1 : 0;
+    
+endmodule
+
+module ALU_unit(Opcode, data1, data2, result,zero);
     input [4:0] Opcode;
     input [31:0] data1;
     input [31:0] data2;
 
     output  reg [31:0] result;
+    output  zero;
 
-    wire [31:0] result00, result01, result02, result03, result04, result05, result06, result07, result08, result09, result10, result11, result12, result13, result14, result15;
+    wire [31:0] result00, result01, result02, result03, result04, result05, result06, result07, result08, result09, result10, result11, result12, result13, result14, result15, result16;
 
     Add_unit add_unit(data1, data2, result00);
     XOR_unit xor_unit(data1, data2, result01);
@@ -161,6 +178,8 @@ module ALU_unit(Opcode, data1, data2, result);
     SLL_Unit sll_unit(data1, data2, result13);
     SRA_Unit sra_unit(data1, data2, result14);
     SLT_Unit slt_unit(data1, data2, result15);
+    Sub_unit sub_unit(data1, data2, result16);
+    Zero_out zero_out(result16, zero);
 
     //mux for selecting the result
     always @(*) begin
@@ -181,6 +200,8 @@ module ALU_unit(Opcode, data1, data2, result);
             5'b01101: result = result13; // sll
             5'b01110: result = result14; // sra
             5'b01111: result = result15; // slt
+            5'b10000: result = result16; // sub
+    
             default: result = 32'bx;
         endcase
     end
