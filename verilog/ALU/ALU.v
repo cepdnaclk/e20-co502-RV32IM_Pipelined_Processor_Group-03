@@ -128,6 +128,14 @@ module SLL_Unit(data1,data2,result);// logical left (to get logical write data 2
     assign result = data1 << data2;
 endmodule
 
+module SRL_unit(data1,data2,result);// logical right (to get logical write data 2 will be negative)
+    input [31:0] data1;
+    input [31:0] data2;
+    output [31:0] result;
+    assign result = data1 >> data2;
+
+endmodule
+
 module SRA_Unit(data1,data2,result);// logical right (to get logical write data 2 will be negative)
     input [31:0] data1;
     input [31:0] data2;
@@ -140,7 +148,7 @@ module SLT_Unit(data1,data2,result);// set less than
     input [31:0] data2;
     output [31:0] result;
 
-    assign result = (data1 < data2) ? 32'b1 : 32'b0;
+    assign result = ($signed(data1) < $signed(data2)) ? 32'b1 : 32'b0;
     
 endmodule
 
@@ -152,6 +160,15 @@ module Zero_out(result,zero);
     
 endmodule
 
+module SLTU_unit(data1,data2,result);// set less than unsigned
+    input [31:0] data1;
+    input [31:0] data2;
+    output [31:0] result;
+
+    assign result = ($unsigned(data1) < $unsigned(data2)) ? 32'b1 : 32'b0;
+
+endmodule
+
 module ALU_unit(Opcode, data1, data2, result,zero);
     input [4:0] Opcode;
     input [31:0] data1;
@@ -160,7 +177,7 @@ module ALU_unit(Opcode, data1, data2, result,zero);
     output  reg [31:0] result;
     output  zero;
 
-    wire [31:0] result00, result01, result02, result03, result04, result05, result06, result07, result08, result09, result10, result11, result12, result13, result14, result15, result16;
+    wire [31:0] result00, result01, result02, result03, result04, result05, result06, result07, result08, result09, result10, result11, result12, result13, result14, result15, result16, result17, result18;
 
     Add_unit add_unit(data1, data2, result00);
     XOR_unit xor_unit(data1, data2, result01);
@@ -180,6 +197,9 @@ module ALU_unit(Opcode, data1, data2, result,zero);
     SLT_Unit slt_unit(data1, data2, result15);
     Sub_unit sub_unit(data1, data2, result16);
     Zero_out zero_out(result16, zero);
+    SLTU_unit sltu_unit(data1, data2, result17);
+    SRL_unit srl_unit(data1, data2, result18);
+    
 
     //mux for selecting the result
     always @(*) begin
@@ -201,6 +221,8 @@ module ALU_unit(Opcode, data1, data2, result,zero);
             5'b01110: result = result14; // sra
             5'b01111: result = result15; // slt
             5'b10000: result = result16; // sub
+            5'b10001: result = result17; // sltu
+            5'b10010: result = result18; // srl
     
             default: result = 32'bx;
         endcase
