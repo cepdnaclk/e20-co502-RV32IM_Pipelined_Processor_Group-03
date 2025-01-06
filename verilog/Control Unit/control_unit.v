@@ -1,288 +1,59 @@
-// Advanced Computer Architecture (CO502)
-// Design: Control Unit
-// Group Number: 03
-// E Numbers: E/20/369, E/20/381, E/20/385
-// Last Modified: 04.12.2024
+module control_unit(
+    input[31:0] instruction,
 
-module controlunit(
-    input [6:0] opcode,
-    input [2:0] funct3,
-    input [6:0] funct7,
-
-    output reg [4:0] alu_select,
+    output reg[4:0] AlU_opcode,
     output reg mux1_select,
     output reg mux2_select,
     output reg mux3_select,
-    output reg istwoscompliment,
     output reg regwrite_enable,
     output reg mem_read,
     output reg mem_write,
     output reg branch,
     output reg jump,
     output reg jal_select,
-    output reg imm_select
+    output reg[2:0] imm_select
 );
+    assign opcode = instruction[6:0];   
+    assign funct3 = instruction[14:12];
+    assign funct7 = instruction[31:25];
 
-    always @(*) 
-    begin
+    always @(opcode,funct7,funct3) begin
         case(opcode)
-
-        7'b0110011: begin // R-type
-            if (func7[4:0] == 5'b00000) begin
-                case(funct3)
-                    3'b000: begin // ADD
-                        if (func7[6:5] == 2'b01) begin
-                            alu_select = 5'b10000; //sub
-                            mux1_select = 1'b0;
-                            mux2_select = 1'b0;
-                            mux3_select = 1'b0;
-                            regwrite_enable = 1'b1;
-                            mem_read = 1'b0;
-                            mem_write = 1'b0;
-                            branch = 1'b0;
-                            jump = 1'b0;
-                            jal_select = 1'b0;
-                            imm_select = 1'b0;
-                        end
-                        else begin
-                            alu_select = 5'b00000; //add
-                            mux1_select = 1'b0;
-                            mux2_select = 1'b0;
-                            mux3_select = 1'b0;
-                            regwrite_enable = 1'b1;
-                            mem_read = 1'b0;
-                            mem_write = 1'b0;
-                            branch = 1'b0;
-                            jump = 1'b0;
-                            jal_select = 1'b0;
-                            imm_select = 1'b0;
-                        end
-                      
-                    end
-                    3'b001: begin // SLL
-                        alu_select = 5'b01101;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                    3'b010: begin // SLT
-                        alu_select = 5'b01111;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                    3'b011: begin // SLTU
-                        alu_select = 5'b10001;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                    3'b100: begin // XOR
-                        alu_select = 5'b00001;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                    3'b101: begin // SRA
-                        if (func7[6:5] == 2'b01) begin
-                            alu_select = 5'b10010; //SRL
-                            mux1_select = 1'b0;
-                            mux2_select = 1'b0;
-                            mux3_select = 1'b0;
-                            regwrite_enable = 1'b1;
-                            mem_read = 1'b0;
-                            mem_write = 1'b0;   
-                            branch = 1'b0;
-                            jump = 1'b0;
-                            jal_select = 1'b0;
-                            imm_select = 1'b0;
-                        end
-                        else begin
-                            alu_select = 5'b01110; //SRA
-                            mux1_select = 1'b0;
-                            mux2_select = 1'b0;
-                            mux3_select = 1'b0;
-                            regwrite_enable = 1'b1;
-                            mem_read = 1'b0;
-                            mem_write = 1'b0;
-                            branch = 1'b0;
-                            jump = 1'b0;
-                            jal_select = 1'b0;
-                            imm_select = 1'b0;
-                        end
-                    end
-                      
-                    3'b110: begin // OR
-                        alu_select = 5'b00011;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                    3'b111: begin // AND
-                        alu_select = 5'b00010;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
+            7'b0110011:begin//R-type
+                mux1_select = 1'b0;
+                mux2_select = 1'b0;
+                mux3_select = 1'b0;
+                regwrite_enable = 1'b1;
+                mem_read = 1'b0;
+                mem_write = 1'b0;
+                branch = 1'b0;
+                jump = 1'b0;
+                jal_select = 1'b0;
+                imm_select = 3'b000;
+                case({funct7,funct3})
+                    10'b0000000000:AlU_opcode = 5'b00000;//ADD
+                    10'b0100000000:AlU_opcode = 5'b10000;//SUB
+                    10'b0000000001:AlU_opcode = 5'b01101;//SLL
+                    10'b0000000010:AlU_opcode = 5'b01111;//SLT
+                    10'b0000000011:AlU_opcode = 5'b10001;//SLTU
+                    10'b0000000100:AlU_opcode = 5'b00001;//XOR
+                    10'b0000000101:AlU_opcode = 5'b10010;//SRL
+                    10'b0100000101:AlU_opcode = 5'b01110;//SRA
+                    10'b0000000110:AlU_opcode = 5'b00011;//OR
+                    10'b0000000111:AlU_opcode = 5'b00010;//AND
+                    10'b0000001000:AlU_opcode = 5'b00100;//MUL
+                    10'b0000001001:AlU_opcode = 5'b00101;//MULH
+                    10'b0000001010:AlU_opcode = 5'b01011;//MULHSU
+                    10'b0000001011:AlU_opcode = 5'b00110;//MULHU
+                    10'b0000001100:AlU_opcode = 5'b01000;//DIV
+                    10'b0000001101:AlU_opcode = 5'b01001;//DIVU
+                    10'b0000001110:AlU_opcode = 5'b01010;//REM
+                    10'b0000001111:AlU_opcode = 5'b01011;//REMU
+                    default:AlU_opcode = 5'b00000;
                 endcase
             end
 
-            else if (func7[4:0] == 5'b00001) begin
-                case(funct3)
-                    3'b000: begin // MUL
-                        alu_select = 5'b00100;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                    3'b001: begin // MULH
-                        alu_select = 5'b00101;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                    3'b010: begin // MULHSU
-                        alu_select = 5'b00111;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                    3'b011: begin // MULHU
-                        alu_select = 5'b00110;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                    3'b100: begin // DIV
-                        alu_select = 5'b01000;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                    3'b101: begin // DIVU
-                        alu_select = 5'b01001;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                    3'b110: begin // REM
-                        alu_select = 5'b01010;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                    3'b111: begin // REMU
-                        alu_select = 5'b01011;
-                        mux1_select = 1'b0;
-                        mux2_select = 1'b0;
-                        mux3_select = 1'b0;
-                        regwrite_enable = 1'b1;
-                        mem_read = 1'b0;
-                        mem_write = 1'b0;
-                        branch = 1'b0;
-                        jump = 1'b0;
-                        jal_select = 1'b0;
-                        imm_select = 1'b0;
-                    end
-                endcase
-            end
-        end
+            //I-type
         endcase
     end
 endmodule
-
-
-
-                        
-            
