@@ -25,7 +25,7 @@ module instruction_decode(
     output reg_write_enable,
     output mem_write_enable,
     output mem_read_enable,
-    output [2:0] branch,
+    output branch,
     output jump,
     output JAL_select,
 

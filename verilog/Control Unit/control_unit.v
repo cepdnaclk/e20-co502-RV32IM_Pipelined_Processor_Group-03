@@ -8,7 +8,7 @@ module control_unit(
     output reg regwrite_enable,
     output reg mem_read,
     output reg mem_write,
-    output reg [2:0]branch,
+    output reg branch,
     output reg jump,
     output reg jal_select,
     output reg[2:0] imm_select
@@ -26,7 +26,7 @@ module control_unit(
                 regwrite_enable = 1'b1;
                 mem_read = 1'b0;
                 mem_write = 1'b0;
-                branch = 3'b000;
+                branch = 1'b0;
                 jump = 1'b0;
                 jal_select = 1'b0;
                 imm_select = 3'b000;

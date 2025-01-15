@@ -169,13 +169,15 @@ module SLTU_unit(data1,data2,result);// set less than unsigned
 
 endmodule
 
-module ALU_unit(Opcode, data1, data2, result,zero);
-    input [4:0] Opcode;
-    input [31:0] data1;
-    input [31:0] data2;
+module ALU_unit(    
+    input [4:0] Opcode,
+    input [31:0] data1,
+    input [31:0] data2,
 
-    output  reg [31:0] result;
-    output  zero;
+    output  reg [31:0] result
+    //output  zero;
+    );
+
 
     wire [31:0] result00, result01, result02, result03, result04, result05, result06, result07, result08, result09, result10, result11, result12, result13, result14, result15, result16, result17, result18;
 
@@ -196,7 +198,7 @@ module ALU_unit(Opcode, data1, data2, result,zero);
     SRA_Unit sra_unit(data1, data2, result14);
     SLT_Unit slt_unit(data1, data2, result15);
     Sub_unit sub_unit(data1, data2, result16);
-    Zero_out zero_out(result16, zero);
+    //Zero_out zero_out(result16, zero);
     SLTU_unit sltu_unit(data1, data2, result17);
     SRL_unit srl_unit(data1, data2, result18);
     
