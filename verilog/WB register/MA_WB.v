@@ -22,10 +22,12 @@ module EX_MA_register(
 
 );
 
-always @(posedge CLK) begin
-    MUX3_select_out <= MUX3_select;
-    regwrite_enable_out <= regwrite_enable;
-    ALU_out_out <= ALU_out;
-    read_data_out <= read_data;
-    rd_out <= rd;
-end
+    always @(posedge CLK) begin
+        MUX3_select_out <= MUX3_select;
+        regwrite_enable_out <= regwrite_enable;
+        ALU_out_out <= ALU_out;
+        read_data_out <= read_data;
+        rd_out <= rd;
+    end
+
+endmodule
