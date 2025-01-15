@@ -1,5 +1,6 @@
-module pc(CLK, RESET, pc);
+module pc(CLK, RESET,pc_in, pc);
   input CLK, RESET;
+  input [31:0] pc_in;
   output reg [31:0] pc;
 
   always @(posedge CLK) 
@@ -10,7 +11,7 @@ module pc(CLK, RESET, pc);
     end
     else 
     begin
-      pc <= #1 pc + 4;
+      pc <= #1 pc_in;
     end
   end
 endmodule
