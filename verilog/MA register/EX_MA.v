@@ -28,13 +28,15 @@ module EX_MA_register(
 
 );
 
-always @(posedge CLK) begin
-    mem_write_out <= mem_write;
-    mem_read_out <= mem_read;
-    MUX3_select_out <= MUX3_select;
-    regwrite_enable_out <= regwrite_enable;
-    ALU_out_out <= ALU_out;
-    DATA_2_out <= DATA_2;
-    func_3_out <= func_3;
-    rd_out <= rd;
-end
+    always @(posedge CLK) begin
+        mem_write_out <= mem_write;
+        mem_read_out <= mem_read;
+        MUX3_select_out <= MUX3_select;
+        regwrite_enable_out <= regwrite_enable;
+        ALU_out_out <= ALU_out;
+        DATA_2_out <= DATA_2;
+        func_3_out <= func_3;
+        rd_out <= rd;
+    end
+
+endmodule
