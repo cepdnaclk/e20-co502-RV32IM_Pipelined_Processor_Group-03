@@ -13,8 +13,10 @@ module Data_Memory(
     input reset,                // Reset signal
     input mem_read,             // Memory read enable
     input mem_write,            // Memory write enable
-    input [9:0] mem_address,    // 10-bit address for 256 words
+    input [31:0] mem_address,    // 10-bit address for 256 words
     input [31:0] data_in,       // Data to be written
+    input [2:0] func3,          // Function code for memory access
+
     output reg [31:0] data_out, // Data to be read
     output reg busywait         // Busywait signal for memory access
 );
@@ -63,9 +65,19 @@ module Data_Memory(
         end
     end
 
+    // Dump memory contents for debugging
+    task dump_memory;
+        integer j;
+        begin
+            for (j = 0; j < 256; j = j + 1) begin
+                $display("Memory[%0d] = %0d", j, memory_array[j]);
+            end
+        end
+    endtask
+
     initial begin
         $dumpfile("DataMemory_wavedata.vcd");
-        $dumpvars(1, memory_array);
+        $dumpvars(1, clk, reset, mem_read, mem_write, mem_address, data_in, data_out, busywait);
     end
 
 endmodule

@@ -1,0 +1,48 @@
+$date
+	Wed Jan 15 13:56:43 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	100ps
+$end
+$scope module Data_Memory $end
+$var wire 1 ! clk $end
+$upscope $end
+$scope module Data_Memory $end
+$var wire 1 " reset $end
+$upscope $end
+$scope module Data_Memory $end
+$var wire 1 # mem_read $end
+$upscope $end
+$scope module Data_Memory $end
+$var wire 1 $ mem_write $end
+$upscope $end
+$scope module Data_Memory $end
+$var wire 32 % mem_address [31:0] $end
+$upscope $end
+$scope module Data_Memory $end
+$var wire 32 & data_in [31:0] $end
+$upscope $end
+$scope module Data_Memory $end
+$var reg 32 ' data_out [31:0] $end
+$upscope $end
+$scope module Data_Memory $end
+$var reg 1 ( busywait $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+x(
+bx '
+bz &
+bz %
+z$
+z#
+z"
+z!
+$end
