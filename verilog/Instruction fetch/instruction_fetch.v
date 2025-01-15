@@ -6,14 +6,14 @@ module instruction_fetch(
     input RESET,
     input [31:0] ALUD,
     input [31:0] MEMD,
-    input [31:0] Rd,
+    input [4:0] Rd,
     input mux3_select,
     input reg_write_enable,
     input branch_control, //selecting the instruction to be fetched is branch,jump or not
     input [31:0] branch_address, //branch address to be fetched
 
     output [31:0] write_data_out,
-    output [31:0] write_reg_out, //rd is a input and output
+    output [4:0] write_reg_out, //rd is a input and output
     output reg_write_enable_out, //reg_write enable is a input and output
     output [31:0] pc_out,
     output [31:0] pc4_out,
