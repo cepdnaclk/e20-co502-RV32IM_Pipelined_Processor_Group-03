@@ -1,4 +1,5 @@
 `include "../PC/PC.v"
+`include "../instruction memory/instruction_memory.v"
 
 
 module instruction_fetch(
@@ -35,7 +36,10 @@ module instruction_fetch(
     //pc+4
     assign pc4_out = pc_out + 4;
     
+    //instruction memory module
+    instruction_memory instruction_memory1(CLK, pc_out, RESET, instruction_out);
 
+    
 
 
 
