@@ -12,10 +12,10 @@ module EX_MA_register(
     input mem_read,
     input MUX3_select,
     input regwrite_enable,
-    input [31:0] ALU_out ,
-    input [31:0] DATA_2 ,
-    input [2:0] func_3,
-    input [4:0] rd,
+    input ALU_out [31:0],
+    input DATA_2 [31:0],
+    input func_3 [2:0],
+    input rd [4:0]
 
     output reg mem_write_out,
     output reg mem_read_out,
