@@ -1,0 +1,123 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "D:\verilog\iverilog\lib\ivl\system.vpi";
+:vpi_module "D:\verilog\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "D:\verilog\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "D:\verilog\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "D:\verilog\iverilog\lib\ivl\va_math.vpi";
+S_00000228c0106790 .scope module, "instruction_fetch" "instruction_fetch" 2 5;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "CLK";
+    .port_info 1 /INPUT 1 "RESET";
+    .port_info 2 /INPUT 32 "ALUD";
+    .port_info 3 /INPUT 32 "MEMD";
+    .port_info 4 /INPUT 5 "Rd";
+    .port_info 5 /INPUT 1 "mux3_select";
+    .port_info 6 /INPUT 1 "reg_write_enable";
+    .port_info 7 /INPUT 1 "branch_control";
+    .port_info 8 /INPUT 32 "branch_address";
+    .port_info 9 /OUTPUT 32 "write_data_out";
+    .port_info 10 /OUTPUT 5 "write_reg_out";
+    .port_info 11 /OUTPUT 1 "reg_write_enable_out";
+    .port_info 12 /OUTPUT 32 "pc_out";
+    .port_info 13 /OUTPUT 32 "pc4_out";
+    .port_info 14 /OUTPUT 32 "instruction_out";
+o00000228c01cd3e8 .functor BUFZ 1, C4<z>; HiZ drive
+L_00000228c021e038 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+L_00000228c01b8e70 .functor XNOR 1, o00000228c01cd3e8, L_00000228c021e038, C4<0>, C4<0>;
+o00000228c01cd268 .functor BUFZ 5, C4<zzzzz>; HiZ drive
+L_00000228c01b9340 .functor BUFZ 5, o00000228c01cd268, C4<00000>, C4<00000>, C4<00000>;
+o00000228c01cd448 .functor BUFZ 1, C4<z>; HiZ drive
+L_00000228c01b9110 .functor BUFZ 1, o00000228c01cd448, C4<0>, C4<0>, C4<0>;
+o00000228c01cd3b8 .functor BUFZ 1, C4<z>; HiZ drive
+L_00000228c021e080 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
+L_00000228c01b90a0 .functor XNOR 1, o00000228c01cd3b8, L_00000228c021e080, C4<0>, C4<0>;
+o00000228c01cd208 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v00000228c01c2640_0 .net "ALUD", 31 0, o00000228c01cd208;  0 drivers
+o00000228c01ccfc8 .functor BUFZ 1, C4<z>; HiZ drive
+v00000228c01c2460_0 .net "CLK", 0 0, o00000228c01ccfc8;  0 drivers
+o00000228c01cd238 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v00000228c01c26e0_0 .net "MEMD", 31 0, o00000228c01cd238;  0 drivers
+o00000228c01cd028 .functor BUFZ 1, C4<z>; HiZ drive
+v00000228c01c28c0_0 .net "RESET", 0 0, o00000228c01cd028;  0 drivers
+v00000228c01c2b40_0 .net "Rd", 4 0, o00000228c01cd268;  0 drivers
+v00000228c01c20a0_0 .net/2u *"_ivl_0", 0 0, L_00000228c021e038;  1 drivers
+v00000228c01c2960_0 .net/2u *"_ivl_10", 0 0, L_00000228c021e080;  1 drivers
+v00000228c01c2500_0 .net *"_ivl_12", 0 0, L_00000228c01b90a0;  1 drivers
+L_00000228c021e0c8 .functor BUFT 1, C4<00000000000000000000000000000100>, C4<0>, C4<0>, C4<0>;
+v00000228c01c2780_0 .net/2u *"_ivl_16", 31 0, L_00000228c021e0c8;  1 drivers
+v00000228c01c2a00_0 .net *"_ivl_2", 0 0, L_00000228c01b8e70;  1 drivers
+o00000228c01cd388 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v00000228c01c1f60_0 .net "branch_address", 31 0, o00000228c01cd388;  0 drivers
+v00000228c01c2aa0_0 .net "branch_control", 0 0, o00000228c01cd3b8;  0 drivers
+v00000228c01c23c0_0 .net "instruction_out", 31 0, v00000228c01c7390_0;  1 drivers
+v00000228c01c2dc0_0 .net "mux3_select", 0 0, o00000228c01cd3e8;  0 drivers
+v00000228c01c2be0_0 .net "pc4_out", 31 0, L_00000228c01c2280;  1 drivers
+v00000228c01c25a0_0 .net "pc_input", 31 0, L_00000228c01c21e0;  1 drivers
+v00000228c01c2820_0 .net "pc_out", 31 0, v00000228c01c1d30_0;  1 drivers
+v00000228c01c2c80_0 .net "reg_write_enable", 0 0, o00000228c01cd448;  0 drivers
+v00000228c01c2d20_0 .net "reg_write_enable_out", 0 0, L_00000228c01b9110;  1 drivers
+v00000228c01c1ec0_0 .net "write_data_out", 31 0, L_00000228c01c2140;  1 drivers
+v00000228c01c2000_0 .net "write_reg_out", 4 0, L_00000228c01b9340;  1 drivers
+L_00000228c01c2140 .functor MUXZ 32, o00000228c01cd238, o00000228c01cd208, L_00000228c01b8e70, C4<>;
+L_00000228c01c21e0 .functor MUXZ 32, L_00000228c01c2280, o00000228c01cd388, L_00000228c01b90a0, C4<>;
+L_00000228c01c2280 .arith/sum 32, v00000228c01c1d30_0, L_00000228c021e0c8;
+S_00000228c0106920 .scope module, "instruction_memory1" "instruction_memory" 2 40, 3 1 0, S_00000228c0106790;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 32 "PC";
+    .port_info 2 /INPUT 1 "reset";
+    .port_info 3 /OUTPUT 32 "instruction";
+v00000228c0106ab0_0 .net "PC", 31 0, v00000228c01c1d30_0;  alias, 1 drivers
+v00000228c0106b50_0 .net "clk", 0 0, o00000228c01ccfc8;  alias, 0 drivers
+v00000228c01c7390_0 .var "instruction", 31 0;
+v00000228c01c7430 .array "memory", 1023 0, 31 0;
+v00000228c01c74d0_0 .net "reset", 0 0, o00000228c01cd028;  alias, 0 drivers
+E_00000228c01099c0 .event posedge, v00000228c0106b50_0;
+S_00000228c01c7570 .scope module, "pc1" "pc" 2 34, 4 1 0, S_00000228c0106790;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "CLK";
+    .port_info 1 /INPUT 1 "RESET";
+    .port_info 2 /INPUT 32 "pc_in";
+    .port_info 3 /OUTPUT 32 "pc";
+v00000228c01c7700_0 .net "CLK", 0 0, o00000228c01ccfc8;  alias, 0 drivers
+v00000228c01c1c90_0 .net "RESET", 0 0, o00000228c01cd028;  alias, 0 drivers
+v00000228c01c1d30_0 .var "pc", 31 0;
+v00000228c01c1dd0_0 .net "pc_in", 31 0, L_00000228c01c21e0;  alias, 1 drivers
+    .scope S_00000228c01c7570;
+T_0 ;
+    %wait E_00000228c01099c0;
+    %load/vec4 v00000228c01c1c90_0;
+    %cmpi/e 1, 0, 1;
+    %jmp/0xz  T_0.0, 4;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v00000228c01c1d30_0, 1;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v00000228c01c1dd0_0;
+    %assign/vec4 v00000228c01c1d30_0, 1;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_00000228c0106920;
+T_1 ;
+    %vpi_call 3 12 "$readmemh", "instructions.txt", v00000228c01c7430 {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_00000228c0106920;
+T_2 ;
+    %wait E_00000228c01099c0;
+    %ix/getv 4, v00000228c0106ab0_0;
+    %load/vec4a v00000228c01c7430, 4;
+    %assign/vec4 v00000228c01c7390_0, 0;
+    %jmp T_2;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "instruction_fetch.v";
+    "./../../../instruction memory/instruction_memory.v";
+    "./../../../PC/PC.v";
