@@ -15,8 +15,8 @@ module instruction_execution(
     input jal_select,
 
     //other
-    input pc4,
-    input pc,
+    input [31:0] pc4,
+    input [31:0] pc,
     input [31:0] immediate,
     input [31:0] data1,
     input [31:0] data2,

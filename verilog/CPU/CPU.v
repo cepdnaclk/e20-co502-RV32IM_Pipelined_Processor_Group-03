@@ -15,16 +15,16 @@
 
 
 module CPU(
-    input CLK,
+    input CLK
 );
-    //implimenting the wires
+        // Instruction Fetch Stage Signals
     wire [31:0] pc_out_if, pc4_out_if, instruction_out_if;
     wire [31:0] write_data_out_if;
     wire [4:0] write_reg_out_if;
     wire reg_write_enable_out_if;
 
     // Instruction Decode Stage Signals
-    wire [31:0] pc_out_id, pc4_out_id;
+    wire [31:0] pc_out_id, pc4_out_id, instruction_out_ip;
     wire [4:0] ALU_opcode_id;
     wire mux1_select_id, mux2_select_id, reg_write_enable_id, mem_write_enable_id, mem_read_enable_id, branch_id, jump_id, JAL_select_id;
     wire [31:0] immidiate_value_id, data1_id, data2_id;
@@ -53,17 +53,17 @@ module CPU(
 
     // Pipeline Registers
     Instfetch_registers IF_ID(
-        .CLK(clk),
+        .CLK(CLK),
         .PC4(pc4_out_if),
         .PC(pc_out_if),
         .instruction(instruction_out_if),
-        .instruction_out(instruction_out_id),
+        .instruction_out(instruction_out_ip),
         .PC_out(pc_out_id),
         .PC4_out(pc4_out_id)
     );
 
     Execution_registers ID_EX(
-        .CLK(clk),
+        .CLK(CLK),
         .alu_select(ALU_opcode_id),
         .mux1_select(mux1_select_id),
         .mux2_select(mux2_select_id),
@@ -97,11 +97,11 @@ module CPU(
         .data1_out(data1_ex),
         .data2_out(data2_ex),
         .Instruction_func3_out(Instruction_func3_ex),
-        .desti nation_reg_out(destination_reg_ex)
+        .destination_reg_out(destination_reg_ex)
     );
 
     EX_MA_register EX_MA(
-        .CLK(clk),
+        .CLK(CLK),
         .mem_write(mem_write_enable_ex),
         .mem_read(mem_read_enable_ex),
         .MUX3_select(mux3_select_ex),
@@ -121,7 +121,7 @@ module CPU(
     );
 
     MA_WB_register MA_WB(
-        .CLK(clk),
+        .CLK(CLK),
         .MUX3_select(mux3_select_ma),
         .regwrite_enable(regwrite_enable_ma),
         .ALU_out(ALU_out_ma),
@@ -136,7 +136,7 @@ module CPU(
 
     // Instruction Fetch Stage
     instruction_fetch IF(
-        .CLK(clk),
+        .CLK(CLK),
         .RESET(reset),
         .ALUD(ALU_out_wb),
         .MEMD(read_data_wb),
@@ -155,8 +155,8 @@ module CPU(
 
     // Instruction Decode Stage
     instruction_decode ID(
-        .instruction(instruction_out_id),
-        .clk(clk),
+        .instruction(instruction_out_ip),
+        .clk(CLK),
         .reset(reset),
         .wite_enable(reg_write_enable_out_if),
         .write_data(write_data_out_if),
@@ -214,7 +214,7 @@ module CPU(
 
     // Memory Access Stage
     memory_access MA(
-        .clk(clk),
+        .clk(CLK),
         .reset(reset),
         .mem_read(mem_read_ma),
         .mem_write(mem_write_ma),
@@ -230,6 +230,7 @@ module CPU(
         .rd_out(rd_ma),
         .read_data(read_data_ma)
     );
+    
     
 
 endmodule

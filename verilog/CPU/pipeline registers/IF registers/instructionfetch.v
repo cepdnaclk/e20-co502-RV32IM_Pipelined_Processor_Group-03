@@ -1,6 +1,6 @@
 module Instfetch_registers(
     input CLK,
-    input PC4,
+    input [31:0] PC4,
     input [31:0] PC,
     input [31:0] instruction,
 

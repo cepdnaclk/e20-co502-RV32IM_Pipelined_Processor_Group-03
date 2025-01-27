@@ -17,7 +17,7 @@ module memory_access(
     output mux3_select_out,
     output regwrite_enable_out,
     output [31:0] alud_out,
-    output [31:0] rd_out,
+    output [4:0] rd_out,
 
     //output
     output [31:0] read_data
