@@ -76,7 +76,7 @@ module Data_Memory(
     endtask
 
     initial begin
-        $dumpfile("DataMemory_wavedata.vcd");
+        //$dumpfile("DataMemory_wavedata.vcd");
         $dumpvars(1, clk, reset, mem_read, mem_write, mem_address, data_in, data_out, busywait);
     end
 

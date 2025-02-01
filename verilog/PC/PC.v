@@ -8,10 +8,11 @@ module pc(CLK, RESET,pc_in, pc);
     if (RESET == 1'b1) 
     begin
       pc <= #1 0;
+  
     end
     else 
     begin
-      pc <= #1 pc_in;
+      pc <= #1 pc_in + 4;
     end
   end
 endmodule

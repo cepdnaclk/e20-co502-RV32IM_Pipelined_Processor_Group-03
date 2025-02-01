@@ -15,7 +15,8 @@
 
 
 module CPU(
-    input CLK
+    input wire CLK,
+    input wire RESET
 );
         // Instruction Fetch Stage Signals
     wire [31:0] pc_out_if, pc4_out_if, instruction_out_if;
@@ -137,7 +138,7 @@ module CPU(
     // Instruction Fetch Stage
     instruction_fetch IF(
         .CLK(CLK),
-        .RESET(reset),
+        .RESET(RESET),
         .ALUD(ALU_out_wb),
         .MEMD(read_data_wb),
         .Rd(rd_wb),
@@ -157,7 +158,7 @@ module CPU(
     instruction_decode ID(
         .instruction(instruction_out_ip),
         .clk(CLK),
-        .reset(reset),
+        .reset(RESET),
         .wite_enable(reg_write_enable_out_if),
         .write_data(write_data_out_if),
         .write_reg(write_reg_out_if),

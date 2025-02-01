@@ -26,9 +26,26 @@ module instruction_fetch(
     assign write_reg_out = Rd;
     assign reg_write_enable_out = reg_write_enable;
 
-    wire [31:0] pc_input;
+    reg [31:0] pc_input;
     //mux to select the pc input
-    assign pc_input = (branch_control == 1'b1) ? branch_address : pc4_out;
+    always @(posedge CLK)
+    begin
+        if(RESET == 1'b1)
+        begin
+            pc_input <= 32'b0;
+        end
+        else
+        begin
+            if(branch_control == 1'b1)
+            begin
+                pc_input <= branch_address;
+            end
+            else
+            begin
+                pc_input <= pc4_out;
+            end
+        end
+    end
 
     //pc module
     pc pc1(CLK, RESET, pc_input, pc_out);
