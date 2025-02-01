@@ -13,6 +13,10 @@ module control_unit(
     output reg jal_select,
     output reg[2:0] imm_select
 );
+    wire [6:0] opcode;
+    wire [2:0] funct3;
+    wire [6:0] funct7;
+    
     assign opcode = instruction[6:0];   
     assign funct3 = instruction[14:12];
     assign funct7 = instruction[31:25];
