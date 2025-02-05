@@ -21,11 +21,16 @@ module CPUtb;
 		$finish;
         
     end
-
+    integer i;
     initial
     begin
         $dumpfile("cputb_dump.vcd");
 	    $dumpvars(0, CPUtb);
+
+        //dumping the regiter files
+      
+        for (i=0 ;i<8;i=i+1)
+            $dumpvars(1,mycpu.ID.register_file.register[i]);
     end
     
 // clock genaration.
