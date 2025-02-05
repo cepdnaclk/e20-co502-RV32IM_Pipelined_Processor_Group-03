@@ -15,12 +15,15 @@ module Instfetch_registers(
     reg [31:0] PC4_intermediate;
 
     always @(posedge CLK) begin
-        instruction_out <= instruction_intermediate;
-        PC_out <= PC_intermediate;
-        PC4_out <= PC4_intermediate;
+        instruction_out <= instruction;
+        PC_out <= PC;
+        PC4_out <= PC4;
+        // instruction_out = instruction_intermediate;
+        // PC_out = PC_intermediate;
+        // PC4_out = PC4_intermediate;
 
-        instruction_intermediate <= instruction;
-        PC_intermediate <= PC;
-        PC4_intermediate <= PC4;
+        // instruction_intermediate = instruction;
+        // PC_intermediate = PC;
+        // PC4_intermediate = PC4;
     end
 endmodule
