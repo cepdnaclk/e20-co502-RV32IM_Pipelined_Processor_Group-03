@@ -21,10 +21,10 @@ module control_unit(
     assign funct3 = instruction[14:12];
     assign funct7 = instruction[31:25];
 
-    always @(opcode,funct7,funct3) begin
+    always @(instruction) begin
         case(opcode)
             7'b0110011:begin//R-type
-                mux1_select = 1'b0;
+                mux1_select = 1'b1;
                 mux2_select = 1'b0;
                 mux3_select = 1'b0;
                 regwrite_enable = 1'b1;
@@ -58,6 +58,34 @@ module control_unit(
             end
 
             //I-type
+
+            7'b0000011: begin #1		            //Load instructions (LB, LH, LW, LBU, LHU)
+                ALUOP = 5'b00000;
+                imm_select = 3'b000;
+                mux1_select = 1'b0;
+                mux2_select = 1'b1;
+                jal_select = 1'b0;
+                mux3_select = 1'b1;
+                regwrite_enable = 1'b1;
+                mem_read = 1'b1;
+                mem_write = 1'b0;
+                branch = 1'b0;
+                jump = 1'b0;                    
+            end
+
+            7'b0100011: begin #1                //Store instructions (SB, SH, SW, SBU, SHU)
+                ALUOP = 5'b00000;
+                imm_select = 3'b001;
+                mux1_select = 1'b0;
+                mux2_select = 1'b1;
+                jal_select = 1'b0;
+                mux3_select= 1'bx;
+                regwrite_enable = 1'b0;
+                mem_read = 1'b0;
+                mem_write = 1'b1;
+                branch = 1'b0;
+                jump = 1'b0;             
+            end
         endcase
     end
 endmodule
