@@ -1,0 +1,70 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Wed Feb 05 08:22:41 2025
+[*]
+[dumpfile] "E:\university of peradeniya\academic\Semester 5\CO502 - Advanced Computer Architecture\project\e20-co502-RV32IM_Pipelined_Processor_Group-03\gtkwave\dump.vcd"
+[savefile] "E:\university of peradeniya\academic\Semester 5\CO502 - Advanced Computer Architecture\project\e20-co502-RV32IM_Pipelined_Processor_Group-03\gtkwave\wave.gtkw"
+[timestart] 103880
+[size] 1536 793
+[pos] -1 -1
+*-14.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] CPUtb.
+[treeopen] CPUtb.mycpu.
+[treeopen] CPUtb.mycpu.EX.
+[treeopen] CPUtb.mycpu.IF.
+[sst_width] 197
+[signals_width] 166
+[sst_expanded] 1
+[sst_vpaned_height] 221
+@28
+CPUtb.mycpu.CLK
+@22
+CPUtb.mycpu.IF.pc1.pc[31:0]
+@28
+CPUtb.mycpu.IF.pc1.RESET
+@22
+CPUtb.mycpu.IF.instruction_memory1.instruction[31:0]
+@200
+-
+-ALU
+@c00022
+CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+@28
+(0)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(1)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(2)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(3)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(4)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(5)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(6)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(7)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(8)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(9)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(10)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(11)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(12)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(13)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(14)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(15)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(16)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(17)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(18)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(19)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(20)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(21)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(22)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(23)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(24)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(25)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(26)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(27)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(28)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(29)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(30)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+(31)CPUtb.mycpu.EX.ALU_unit1.data1[31:0]
+@1401200
+-group_end
+@23
+CPUtb.mycpu.EX.ALU_unit1.data2[31:0]
+[pattern_trace] 1
+[pattern_trace] 0
