@@ -21,7 +21,7 @@ module control_unit(
     assign funct3 = instruction[14:12];
     assign funct7 = instruction[31:25];
 
-    always @(instruction) begin
+    always @(opcode,funct7,funct3) begin
         case(opcode)
             7'b0110011:begin//R-type
                 mux1_select = 1'b1;
