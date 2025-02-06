@@ -1,7 +1,7 @@
 module instruction_memory(
     input  clk,
     input [31:0] PC,
-    input reset
+    input reset,
 
     output reg [31:0] instruction
 );
