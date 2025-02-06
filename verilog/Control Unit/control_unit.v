@@ -60,7 +60,7 @@ module control_unit(
             //I-type
 
             7'b0000011: begin #1		            //Load instructions (LB, LH, LW, LBU, LHU)
-                ALUOP = 5'b00000;
+                AlU_opcode = 5'b00000;
                 imm_select = 3'b000;
                 mux1_select = 1'b0;
                 mux2_select = 1'b1;
@@ -74,7 +74,7 @@ module control_unit(
             end
 
             7'b0100011: begin #1                //Store instructions (SB, SH, SW, SBU, SHU)
-                ALUOP = 5'b00000;
+                AlU_opcode = 5'b00000;
                 imm_select = 3'b001;
                 mux1_select = 1'b0;
                 mux2_select = 1'b1;
