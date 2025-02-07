@@ -27,19 +27,19 @@ module CPU(
     // Instruction Decode Stage Signals
     wire [31:0] pc_out_id, pc4_out_id, instruction_out_ip;
     wire [4:0] ALU_opcode_id;
-    wire mux1_select_id, mux2_select_id, reg_write_enable_id, mem_write_enable_id, mem_read_enable_id, branch_id, jump_id, JAL_select_id;
+    wire mux1_select_id, mux2_select_id,mux3_select_id, reg_write_enable_id, mem_write_enable_id, mem_read_enable_id, branch_id, jump_id, JAL_select_id;
     wire [31:0] immidiate_value_id, data1_id, data2_id;
     wire [2:0] funct3_id;
     wire [4:0] Rd_id;
 
     // Execution Stage Signals
     wire [4:0] ALU_select_ex;
-    wire mux1_select_ex, mux2_select_ex, mux3_select_ex, regwrite_enable_ex, mem_write_enable_ex, mem_read_enable_ex, branch_ex, jump_ex, jal_select_ex;
+    wire mux1_select_ex, mux2_select_ex, mux3_select_ex, mux3_select_ex_out, regwrite_enable_ex, mem_write_enable_ex, mem_read_enable_ex, branch_ex, jump_ex, jal_select_ex;
     wire [31:0] PC4_ex, PC_ex, Immediate_ex, data1_ex, data2_ex;
     wire [2:0] Instruction_func3_ex;
-    wire [4:0] destination_reg_ex;
+    wire [4:0] destination_reg_ex, destination_reg_ex_out;
     wire [31:0] ALUD_ex, ALU_result_ex, data2_out_ex;
-    wire branch_control_out_ex;
+    wire branch_control_out_ex, regwrite_enable_ex_out;
 
     // Memory Access Stage Signals
     wire mem_write_ma, mem_read_ma, mux3_select_ma, regwrite_enable_ma;
@@ -105,12 +105,12 @@ module CPU(
         .CLK(CLK),
         .mem_write(mem_write_enable_ex),
         .mem_read(mem_read_enable_ex),
-        .MUX3_select(mux3_select_ex),
-        .regwrite_enable(regwrite_enable_ex),
+        .MUX3_select(mux3_select_ex_out),
+        .regwrite_enable(regwrite_enable_ex_out),
         .ALU_out(ALU_result_ex),
         .DATA_2(data2_out_ex),
         .func_3(Instruction_func3_ex),
-        .rd(destination_reg_ex),
+        .rd(destination_reg_ex_out),
         .mem_write_out(mem_write_ma),
         .mem_read_out(mem_read_ma),
         .MUX3_select_out(mux3_select_ma),
@@ -169,6 +169,7 @@ module CPU(
         .AlU_opcode(ALU_opcode_id),
         .mux1_select(mux1_select_id),
         .mux2_select(mux2_select_id),
+        .mux3_select(mux3_select_id),
         .reg_write_enable(reg_write_enable_id),
         .mem_write_enable(mem_write_enable_id),
         .mem_read_enable(mem_read_enable_id),
@@ -205,11 +206,11 @@ module CPU(
         .ALU_result(ALU_result_ex),
         .data2_out(data2_out_ex),
         .funct3_out(Instruction_func3_ex),
-        .rd_out(destination_reg_ex),
+        .rd_out(destination_reg_ex_out),
         .memory_read_enable_out(mem_read_enable_ex),
         .memory_write_enable_out(mem_write_enable_ex),
-        .regwrite_enable_out(regwrite_enable_ex),
-        .mux3_select_out(mux3_select_ex),
+        .regwrite_enable_out(regwrite_enable_ex_out),
+        .mux3_select_out(mux3_select_ex_out),
         .branch_control_out(branch_control_out_ex)
     );
 

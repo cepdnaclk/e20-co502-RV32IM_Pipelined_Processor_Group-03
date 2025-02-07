@@ -24,7 +24,7 @@ module control_unit(
     always @(opcode,funct7,funct3) begin
         case(opcode)
             7'b0110011:begin//R-type
-                mux1_select = 1'b0;
+                mux1_select = 1'b1;
                 mux2_select = 1'b0;
                 mux3_select = 1'b0;
                 regwrite_enable = 1'b1;
