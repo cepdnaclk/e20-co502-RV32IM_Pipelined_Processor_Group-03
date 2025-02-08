@@ -58,6 +58,34 @@ module control_unit(
             end
 
             //I-type
+
+            7'b0000011: begin #1		            //Load instructions (LB, LH, LW, LBU, LHU)
+                AlU_opcode = 5'b00000;
+                imm_select = 3'b000;
+                mux1_select = 1'b0;
+                mux2_select = 1'b1;
+                jal_select = 1'b0;
+                mux3_select = 1'b1;
+                regwrite_enable = 1'b1;
+                mem_read = 1'b1;
+                mem_write = 1'b0;
+                branch = 1'b0;
+                jump = 1'b0;                    
+            end
+
+            7'b0100011: begin #1                //Store instructions (SB, SH, SW, SBU, SHU)
+                AlU_opcode = 5'b00000;
+                imm_select = 3'b001;
+                mux1_select = 1'b0;
+                mux2_select = 1'b1;
+                jal_select = 1'b0;
+                mux3_select= 1'bx;
+                regwrite_enable = 1'b0;
+                mem_read = 1'b0;
+                mem_write = 1'b1;
+                branch = 1'b0;
+                jump = 1'b0;             
+            end
         endcase
     end
 endmodule
