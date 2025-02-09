@@ -2,9 +2,9 @@ module control_unit(
     input[31:0] instruction,
 
     output reg[4:0] AlU_opcode,
-    output reg mux1_select,
-    output reg mux2_select,
-    output reg mux3_select,
+    output reg mux1_select,  //PC Select
+    output reg mux2_select,  //Imm Select
+    output reg mux3_select,  //Data Mem Select
     output reg regwrite_enable,
     output reg mem_read,
     output reg mem_write,
@@ -23,7 +23,7 @@ module control_unit(
 
     always @(opcode,funct7,funct3) begin
         case(opcode)
-            7'b0110011:begin//R-type
+            7'b0110011:begin//R-type Instructions----------------------------------------
                 mux1_select = 1'b1;
                 mux2_select = 1'b0;
                 mux3_select = 1'b0;
@@ -57,9 +57,9 @@ module control_unit(
                 endcase
             end
 
-            //I-type
-
-            7'b0000011: begin #1		            //Load instructions (LB, LH, LW, LBU, LHU)
+            //I-type Instructions-------------------------------------------------------
+            //Load instructions (LB, LH, LW, LBU, LHU)
+            7'b0000011: begin #1		            
                 AlU_opcode = 5'b00000;
                 imm_select = 3'b000;
                 mux1_select = 1'b0;
@@ -73,7 +73,60 @@ module control_unit(
                 jump = 1'b0;                    
             end
 
-            7'b0100011: begin #1                //Store instructions (SB, SH, SW, SBU, SHU)
+            //ADDI, SLLI, SLTI, SLTIU, XORI, SLRI, SRAI, ORI, ANDI
+            7'b0010011: begin #1		            
+                imm_select = 3'b000;
+                mux1_select = 1'b0;
+                mux2_select = 1'b1;
+                jal_select = 1'b0;
+                mux3_select = 1'b0;
+                regwrite_enable = 1'b1;
+                mem_read = 1'b0;
+                mem_write = 1'b0;
+                branch = 1'b0;
+                jump = 1'b0;   
+
+                case(funct3)
+                    3'b000: AlU_opcode = 5'b00001;               //ADDI
+                    3'b001: begin                                //SLLI
+                        case(funct7)
+                            7'b0000000: AlU_opcode = 5'b00011;
+                        endcase
+                    end
+                    
+                    3'b010: AlU_opcode = 5'b00100;               //SLTI
+                    3'b011: AlU_opcode = 5'b00101;               //SLTIU
+                    3'b100: AlU_opcode = 5'b00110;               //XORI
+                    3'b101: begin                                //SLRI, SRAI
+                        case(funct7)
+                            7'b0000000: AlU_opcode = 5'b00111;   //SRLI 
+                            7'b0100000: AlU_opcode = 5'b01000;   //SRAI     
+                        endcase                        
+                    end
+                    
+                    3'b110: AlU_opcode = 5'b01001;                    //ORI
+                    3'b111: AlU_opcode = 5'b01010;                    //ANDI
+                endcase      
+            end
+
+            //JALR Instruction
+            7'b1100111: begin #1                
+                AlU_opcode = 5'b00001;
+                imm_select = 3'b000;
+                mux1_select = 1'b0;
+                mux2_select = 1'b1;
+                jal_select = 1'b1;
+                mux3_select= 1'b0;
+                regwrite_enable = 1'b1;
+                mem_read = 1'b0;
+                mem_write = 1'b0;
+                branch = 1'b0;
+                jump = 1'b1;             
+            end
+
+            //S-type Instructions---------------------------------------------------------
+            //Store instructions (SB, SH, SW, SBU, SHU)
+            7'b0100011: begin #1                
                 AlU_opcode = 5'b00000;
                 imm_select = 3'b001;
                 mux1_select = 1'b0;
@@ -86,6 +139,69 @@ module control_unit(
                 branch = 1'b0;
                 jump = 1'b0;             
             end
+
+            //B-type instructions------------------------------------------------------ 
+            7'b1100011: begin #1                
+                AlU_opcode = 5'b00010;
+                imm_select = 3'b011;
+                mux1_select = 1'b1;
+                mux2_select = 1'b1;
+                jal_select = 1'b0;
+                mux3_select= 1'bx;
+                regwrite_enable = 1'b0;
+                mem_read = 1'b0;
+                mem_write = 1'b0;
+                branch = 1'b1;
+                jump = 1'b0;             
+            end
+
+            // J-type Insructions------------------------------------------------
+            // JAL
+            7'b1101111: begin #1                
+                AlU_opcode = 5'b00001;
+                imm_select = 3'b100;
+                mux1_select = 1'b1;
+                mux2_select = 1'b1;
+                jal_select = 1'b1;
+                mux3_select= 1'b0;
+                regwrite_enable = 1'b1;
+                mem_read = 1'b0;
+                mem_write = 1'b0;
+                branch = 1'b0;
+                jump = 1'b1;             
+            end
+
+            // U-type instructions---------------------------------------------
+            //AUIPC
+            7'b0010111: begin #1                
+                AlU_opcode = 5'b00001;
+                imm_select = 3'b010;
+                mux1_select = 1'b1;
+                mux2_select = 1'b1;
+                jal_select = 1'b0;
+                mux3_select= 1'b0;
+                regwrite_enable = 1'b1;
+                mem_read = 1'b0;
+                mem_write = 1'b0;
+                branch = 1'b0;
+                jump = 1'b0;             
+            end
+
+            //LUI
+            7'b0110111: begin #1                
+                AlU_opcode = 5'b00000;
+                imm_select = 3'b010;
+                mux1_select = 1'bx;
+                mux2_select = 1'b1;
+                jal_select = 1'b0;
+                mux3_select= 1'b0;
+                regwrite_enable = 1'b1;
+                mem_read = 1'b0;
+                mem_write = 1'b0;
+                branch = 1'b0;
+                jump = 1'b0;           
+            end
+
         endcase
     end
 endmodule
