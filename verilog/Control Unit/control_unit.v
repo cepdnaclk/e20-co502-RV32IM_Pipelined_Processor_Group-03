@@ -87,7 +87,7 @@ module control_unit(
                 jump = 1'b0;   
 
                 case(funct3)
-                    3'b000: AlU_opcode = 5'b00001;               //ADDI
+                    3'b000: AlU_opcode = 5'b00000;               //ADDI
                     3'b001: begin                                //SLLI
                         case(funct7)
                             7'b0000000: AlU_opcode = 5'b00011;
@@ -111,7 +111,7 @@ module control_unit(
 
             //JALR Instruction
             7'b1100111: begin #1                
-                AlU_opcode = 5'b00001;
+                AlU_opcode = 5'b00000;
                 imm_select = 3'b000;
                 mux1_select = 1'b0;
                 mux2_select = 1'b1;
