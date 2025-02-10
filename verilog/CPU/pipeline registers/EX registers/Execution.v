@@ -62,44 +62,64 @@ module Execution_registers(
     reg [4:0] destination_reg_intermediate;
 
     always @(posedge CLK) begin
-        alu_select_out <= alu_select_intermediate;
-        mux1_select_out <= mux1_select_intermediate;
-        mux2_select_out <= mux2_select_intermediate;
-        mux3_select_out <= mux3_select_intermediate;
-        regwrite_enable_out <= regwrite_enable_intermediate;
-        mem_read_out <= mem_read_intermediate;
-        mem_write_out <= mem_write_intermediate;
-        branch_out <= branch_intermediate;
-        jump_out <= jump_intermediate;
-        jal_select_out <= jal_select_intermediate;
+        alu_select_out <= alu_select;
+        mux1_select_out <= mux1_select;
+        mux2_select_out <= mux2_select;
+        mux3_select_out <= mux3_select;
+        regwrite_enable_out <= regwrite_enable;
+        mem_read_out <= mem_read;
+        mem_write_out <= mem_write;
+        branch_out <= branch;
+        jump_out <= jump;
+        jal_select_out <= jal_select;
 
-        PC4_out <= PC4_intermediate;
-        PC_out <= PC_intermediate;
-        Immediate_out <= Immediate_intermediate;
-        data1_out <= data1_intermediate;
-        data2_out <= data2_intermediate;
+        PC4_out <= PC4;
+        PC_out <= PC;
+        Immediate_out <= Immediate;
+        data1_out <= data1;
+        data2_out <= data2;
 
-        Instruction_func3_out <= Instruction_func3_intermediate;
-        destination_reg_out <= destination_reg_intermediate;
+        Instruction_func3_out <= Instruction_func3;
+        destination_reg_out <= destination_reg;
 
-        alu_select_intermediate <= alu_select;
-        mux1_select_intermediate <= mux1_select;
-        mux2_select_intermediate <= mux2_select;
-        mux3_select_intermediate <= mux3_select;
-        regwrite_enable_intermediate <= regwrite_enable;
-        mem_read_intermediate <= mem_read;
-        mem_write_intermediate <= mem_write;
-        branch_intermediate <= branch;
-        jump_intermediate <= jump;
-        jal_select_intermediate <= jal_select;
+        // alu_select_out <= alu_select_intermediate;
+        // mux1_select_out <= mux1_select_intermediate;
+        // mux2_select_out <= mux2_select_intermediate;
+        // mux3_select_out <= mux3_select_intermediate;
+        // regwrite_enable_out <= regwrite_enable_intermediate;
+        // mem_read_out <= mem_read_intermediate;
+        // mem_write_out <= mem_write_intermediate;
+        // branch_out <= branch_intermediate;
+        // jump_out <= jump_intermediate;
+        // jal_select_out <= jal_select_intermediate;
 
-        PC4_intermediate <= PC4;
-        PC_intermediate <= PC;
-        Immediate_intermediate <= Immediate;
-        data1_intermediate <= data1;
-        data2_intermediate <= data2;
+        // PC4_out <= PC4_intermediate;
+        // PC_out <= PC_intermediate;
+        // Immediate_out <= Immediate_intermediate;
+        // data1_out <= data1_intermediate;
+        // data2_out <= data2_intermediate;
 
-        Instruction_func3_intermediate <= Instruction_func3;
-        destination_reg_intermediate <= destination_reg;
+        // Instruction_func3_out <= Instruction_func3_intermediate;
+        // destination_reg_out <= destination_reg_intermediate;
+
+        // alu_select_intermediate <= alu_select;
+        // mux1_select_intermediate <= mux1_select;
+        // mux2_select_intermediate <= mux2_select;
+        // mux3_select_intermediate <= mux3_select;
+        // regwrite_enable_intermediate <= regwrite_enable;
+        // mem_read_intermediate <= mem_read;
+        // mem_write_intermediate <= mem_write;
+        // branch_intermediate <= branch;
+        // jump_intermediate <= jump;
+        // jal_select_intermediate <= jal_select;
+
+        // PC4_intermediate <= PC4;
+        // PC_intermediate <= PC;
+        // Immediate_intermediate <= Immediate;
+        // data1_intermediate <= data1;
+        // data2_intermediate <= data2;
+
+        // Instruction_func3_intermediate <= Instruction_func3;
+        // destination_reg_intermediate <= destination_reg;
     end
 endmodule   
