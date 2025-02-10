@@ -142,7 +142,7 @@ module control_unit(
 
             //B-type instructions------------------------------------------------------ 
             7'b1100011: begin #1                
-                AlU_opcode = 5'b00010;
+                AlU_opcode = 5'b10000;
                 imm_select = 3'b011;
                 mux1_select = 1'b1;
                 mux2_select = 1'b1;
@@ -158,7 +158,7 @@ module control_unit(
             // J-type Insructions------------------------------------------------
             // JAL
             7'b1101111: begin #1                
-                AlU_opcode = 5'b00001;
+                AlU_opcode = 5'b00000;
                 imm_select = 3'b100;
                 mux1_select = 1'b1;
                 mux2_select = 1'b1;
@@ -174,7 +174,7 @@ module control_unit(
             // U-type instructions---------------------------------------------
             //AUIPC
             7'b0010111: begin #1                
-                AlU_opcode = 5'b00001;
+                AlU_opcode = 5'b00000;
                 imm_select = 3'b010;
                 mux1_select = 1'b1;
                 mux2_select = 1'b1;
@@ -189,7 +189,7 @@ module control_unit(
 
             //LUI
             7'b0110111: begin #1                
-                AlU_opcode = 5'b00000;
+                AlU_opcode = 5'b01100;
                 imm_select = 3'b010;
                 mux1_select = 1'bx;
                 mux2_select = 1'b1;
