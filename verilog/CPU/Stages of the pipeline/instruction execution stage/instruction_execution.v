@@ -1,6 +1,5 @@
 `include "../ALU/ALU.v"
 `include "../branch control/branch_control.v"
-`include "../Hazard_Unit/load_use_hazard.v"
 `include "../Hazard_Unit/Forwarding_Unit.v"
 `include "../Hazard_Unit/Hazard_Detection.v"
 
@@ -9,7 +8,7 @@ module instruction_execution(
     input [4:0]ALU_select,
     input mux1_select,
     input mux2_select,
-    input mux3_select, 
+    input mux3_select, //input --> output
     input regwrite_enable, //input --> output
     input memory_write_enable,//input --> output
     input memory_read_enable, // input --> output
@@ -27,7 +26,7 @@ module instruction_execution(
     input [4:0] EX_MEM_rd, MEM_WB_rd, // Forwarding sources
     input EX_MEM_regWrite, MEM_WB_regWrite,
     input EX_MEM_memRead, MEM_WB_memRead,
-    input [2:0] funct3,
+    input [2:0] funct3, //input --> output
 
     output [31:0] ALUD,
     output [31:0] ALU_result,
@@ -38,7 +37,7 @@ module instruction_execution(
     output memory_read_enable_out,
     output memory_write_enable_out,
     output regwrite_enable_out,
-    output mux3_select_out, 
+    output mux3_select_out, //input --> output
     output branch_control_out,
     output stall // Stall signal from hazard detection
 );
@@ -46,24 +45,17 @@ module instruction_execution(
     // Forwarding Unit
     wire [1:0] forwardA, forwardB;
     Forwarding_Unit FU(
-        .ID_EX_rs1(rs1), 
-        .ID_EX_rs2(rs2),
-        .EX_MEM_rd(EX_MEM_rd), 
-        .MEM_WB_rd(MEM_WB_rd),
-        .EX_MEM_regWrite(EX_MEM_regWrite), 
-        .MEM_WB_regWrite(MEM_WB_regWrite),
-        .forwardA(forwardA), 
-        .forwardB(forwardB)
+        .ID_EX_rs1(rs1), .ID_EX_rs2(rs2),
+        .EX_MEM_rd(EX_MEM_rd), .MEM_WB_rd(MEM_WB_rd),
+        .EX_MEM_regWrite(EX_MEM_regWrite), .MEM_WB_regWrite(MEM_WB_regWrite),
+        .forwardA(forwardA), .forwardB(forwardB)
     );
 
     // Hazard Detection Unit
-    Hazard_Detection HDU(
-        .ID_EX_rs1(rs1), 
-        .ID_EX_rs2(rs2),
-        .EX_MEM_rd(EX_MEM_rd), 
-        .MEM_WB_rd(MEM_WB_rd),
-        .EX_MEM_memRead(EX_MEM_memRead), 
-        .MEM_WB_memRead(MEM_WB_memRead),
+    Hazard_Detection_Unit HDU(
+        .ID_EX_rs1(rs1), .ID_EX_rs2(rs2),
+        .EX_MEM_rd(EX_MEM_rd), .MEM_WB_rd(MEM_WB_rd),
+        .EX_MEM_memRead(EX_MEM_memRead), .MEM_WB_memRead(MEM_WB_memRead),
         .stall(stall)
     );
 

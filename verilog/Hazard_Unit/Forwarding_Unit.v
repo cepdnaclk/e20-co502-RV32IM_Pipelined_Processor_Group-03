@@ -1,3 +1,5 @@
+// Forwarding Unit Implementation for RISC-V Pipelined Processor
+
 module Forwarding_Unit(
     input [4:0] ID_EX_rs1, ID_EX_rs2, // Source registers in EX stage
     input [4:0] EX_MEM_rd, MEM_WB_rd, // Destination registers from later stages

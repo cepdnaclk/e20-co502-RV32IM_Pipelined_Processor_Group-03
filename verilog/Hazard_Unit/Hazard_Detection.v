@@ -1,5 +1,5 @@
-//Adding Stalls to avoid Hazards
-module Hazard_Detection(
+// Hazard Detection Unit Implementation
+module Hazard_Detection_Unit(
     input [4:0] ID_EX_rs1, ID_EX_rs2, EX_MEM_rd, MEM_WB_rd,
     input EX_MEM_memRead, MEM_WB_memRead,
     output reg stall
