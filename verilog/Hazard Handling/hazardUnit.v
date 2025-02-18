@@ -46,7 +46,7 @@ always @(*) begin
     ForwardB = 2'b00;
     Stall = 0;
 
-    // MEM-EX Forwarding (Higher Priority) - When ALU result is available in MEM stage
+    // EX-EX Forwarding (Higher Priority) - When ALU result is available in MEM stage
     if (RegWrite_M && (RD_M != 0)) begin
         // Forward ALU result to Rs1 if RD_M matches Rs1_E
         if (RD_M == Rs1_E) ForwardA = 2'b10;
